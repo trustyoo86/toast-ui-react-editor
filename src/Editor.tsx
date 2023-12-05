@@ -1,15 +1,14 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
 /* eslint-disable import/named */
-import { Editor as EditorInstance, EditorOptions, EventMap } from '@toast-ui/editor';
+import Editor, { Editor as EditorInstance, EditorOptions, EventMap } from '@toast-ui/editor';
 
 import type { EditorProps, EventNames } from '@toast-ui/react-editor';
-
 interface TEditorPropsWithHandlers extends EditorProps {
   onChange(value: string): void;
 }
 
-interface TEditorInstance {
+export interface TEditorInstance {
   getInstance(): EditorInstance;
   getRootElement(): HTMLElement;
 }
@@ -46,7 +45,6 @@ const ToastEditor = forwardRef<TEditorInstance, TEditorPropsWithHandlers>(
     const editorRef = useRef<EditorInstance>();
 
     useEffect(() => {
-      const Editor = require('@toast-ui/editor');
       let editor: EditorInstance;
 
       if (rootEl.current) {
@@ -70,15 +68,13 @@ const ToastEditor = forwardRef<TEditorInstance, TEditorPropsWithHandlers>(
             };
           }
         }
-
-        // editor.initialHTML = props.initialValue;
-
-        return () => {
-          if (editorRef.current) {
-            editorRef.current.destroy();
-          }
-        };
       }
+
+      return () => {
+        if (editorRef.current) {
+          editorRef.current.destroy();
+        }
+      };
     }, [ref]);
 
     useEffect(() => {
