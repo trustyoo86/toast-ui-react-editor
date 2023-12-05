@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-import { EventMap, ViewerOptions } from '@toast-ui/editor/dist/toastui-editor-viewer';
+import Viewer, { EventMap, ViewerOptions } from '@toast-ui/editor/dist/toastui-editor-viewer';
 
 import type ViewerInstance from '@toast-ui/editor/dist/toastui-editor-viewer';
 import type { EventNames, ViewerProps } from '@toast-ui/react-editor';
 
-interface TViwerInstance {
+export interface TViwerInstance {
   getInstance(): ViewerInstance;
   getRootElement(): HTMLElement;
 }
@@ -41,7 +41,6 @@ const ToastEditorViewer = forwardRef<TViwerInstance, ViewerOptions>((props, ref)
   const viewerRef = useRef<ViewerInstance>();
 
   useEffect(() => {
-    const Viewer = require('@toast-ui/editor/dist/toastui-editor-viewer');
     let viewer: ViewerInstance;
 
     if (rootEl.current) {
